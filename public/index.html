@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/dist/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;800&display=swap" rel="stylesheet">
+    <title>Feedback Form</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="form_wrapper">
+            <div class="form_header">
+                <h3>Please, fill up the form below <br/>and we will contact you.</h3>
+            </div>
+            <form action="" class="form" id="formEl" method="POST">
+                <div class="form_field">
+                    <div class="input_row">
+                        <label for="name">Name*</label>
+                        <input type="text" id="name" placeholder="Name">
+                    </div>
+                    <div class="error">Please, enter valid name</div>
+                </div>
+                <div class="form_field">
+                    <div class="input_row">
+                        <label for="email">E-mail*</label>
+                        <input type="email" id="email" placeholder="Email">
+                    </div>
+                    <div class="error">Please, enter valid e-mail</div>
+                </div>
+                <div class="form_field">
+                    <div class="input_row">
+                        <label for="phone_number">Phone Number*</label>
+                        <input type="text" id="phone_number" placeholder="Phone Number">
+                    </div>
+                    <div class="error">Please, enter valid phone number</div>
+                </div>
+                <div class="form_field">
+                    <div class="input_row">
+                        <label for="message">Message*</label>
+                        <textarea type="text" id="message" placeholder="Message"></textarea>
+                    </div>
+                    <div class="error">Please, enter valid message</div>
+                </div>
+
+                <button id="submitButton">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/dist/bundle.js"></script>
+</body>
+</html>
