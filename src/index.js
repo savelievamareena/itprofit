@@ -2,7 +2,7 @@ import '../styles/style.scss';
 import Inputmask from "inputmask";
 import {validateName, validateEmail, validatePhone, validateMessage, validateForm} from "./modules/validation";
 import {showError, hideError} from "./modules/errors";
-import {submitForm, Form} from "./modules/form"
+import {submitForm, Form, clearForm} from "./modules/form";
 
 document.addEventListener('DOMContentLoaded', function() {
     let formEl = document.getElementById("formEl");
@@ -13,7 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
     let emailField = document.getElementById("email");
     let phoneNumberField = document.getElementById("phone_number");
     im.mask(phoneNumberField);
+
     let messageField = document.getElementById("message");
+    let modalWindow = document.getElementsByClassName("modal_wrapper")[0];
+    let closeModal = document.getElementById("close_modal");
 
     nameField.addEventListener('input', function (e) {
         const name = this.value;
@@ -43,6 +46,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     })
 
+    closeModal.addEventListener("click", function(e) {
+        modalWindow.style.display = "none";
+        // modalWindow.classList.remove("active");
+    })
+
     formEl.addEventListener("submit", function(e) {
         e.preventDefault();
 
@@ -64,9 +72,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let formObj = new Form(nameField.value, emailField.value, phoneNumberField.value, messageField.value);
         if(!validateForm(formObj)) {
-            alert("Please fill out all the fields properly");
+            modalWindow.style.display = "block";
+            // modalWindow.classList.add("active");
         }else{
             submitForm(formObj);
+            clearForm(nameField, emailField, phoneNumberField, messageField);
         }
     })
 });

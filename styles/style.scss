@@ -9,9 +9,11 @@ body {
 
 .wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding-top: 200px;
+  position: relative;
 }
 
 .form_wrapper {
@@ -74,4 +76,50 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+#success_message {
+  visibility: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+.modal_wrapper {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.modal_window {
+  position:fixed;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  border: 1px solid slategrey;
+  background-color: white;
+  border-radius: 10px;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+
+  .modal_header {
+    border-bottom: 1px solid slategrey;
+    padding: 10px;
+    text-align: right;
+  }
+
+  .modal_body {
+    padding: 10px;
+  }
+
+  #close_modal {
+    padding: 0 4px;
+    cursor: pointer;
+    font-weight: 800;
+  }
 }
