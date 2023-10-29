@@ -13,13 +13,18 @@ function submitForm(formObj) {
     ajaxSubmit(formObj, "http://localhost:9090/api/callback")
         .then(response => {
             if(response.status === "success") {
-                document.getElementById("success_message").innerText = response.msg;
-                document.getElementById("success_message").style.visibility = "visible";
+                document.getElementById("server_message").innerText = response.msg;
+                document.getElementById("server_message").style.visibility = "visible";
                 setTimeout(function() {
-                    document.getElementById("success_message").style.visibility = "hidden";
+                    document.getElementById("server_message").style.visibility = "hidden";
                 }, 2000)
-            }else {
-                console.log("ne peramoga");
+            }else if(response.status === "error"){
+                console.log(response.fields);
+                document.getElementById("server_message").innerText = "Something went wrong. Please, try again later.";
+                document.getElementById("server_message").style.visibility = "visible";
+                setTimeout(function() {
+                    document.getElementById("server_message").style.visibility = "hidden";
+                }, 2000)
             }
     }).catch(error => {
         console.error('Error:', error.message);

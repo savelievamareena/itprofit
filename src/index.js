@@ -47,8 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
     closeModal.addEventListener("click", function(e) {
-        modalWindow.style.display = "none";
-        // modalWindow.classList.remove("active");
+        modalWindow.classList.remove("active");
     })
 
     formEl.addEventListener("submit", function(e) {
@@ -72,8 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let formObj = new Form(nameField.value, emailField.value, phoneNumberField.value, messageField.value);
         if(!validateForm(formObj)) {
-            modalWindow.style.display = "block";
-            // modalWindow.classList.add("active");
+            modalWindow.classList.add("active");
         }else{
             submitForm(formObj);
             clearForm(nameField, emailField, phoneNumberField, messageField);

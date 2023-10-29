@@ -48,11 +48,23 @@ app.post("/api/callback", (req, res) => {
             "msg": "Your request has been successfully sent"
         });
     }else {
+        let errorFields = {};
+        if(!postBody.name) {
+            errorFields.name = "Something went wrong. Please, try again later."
+        }
+        if (!postBody.email) {
+            errorFields.email = "Something went wrong. Please, try again later."
+        }
+        if (!postBody.phone) {
+            errorFields.phone = "Something went wrong. Please, try again later."
+        }
+        if (!postBody.message) {
+            errorFields.message = "Something went wrong. Please, try again later."
+        }
+
         res.send({
             "status": "error",
-            "fields": {
-                "inputName": "сообщение об ошибке"
-            }
+            "fields": errorFields
         })
     }
 })
