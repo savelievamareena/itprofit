@@ -1,7 +1,10 @@
-$body-color: grey;
+$border-color: slategrey;
+$background-color-text: white;
+$background-color-layout: pink;
+$error-color: hotpink;
 
 body {
-  background-color: pink;
+  background-color: $background-color-layout;
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
@@ -18,13 +21,13 @@ body {
 
 .form_wrapper {
   width: 30%;
-  border: 1px solid slategrey;
-  background-color: white;
+  border: 1px solid $border-color;
+  background-color: $background-color-text;
   border-radius: 10px;
 }
 
 .form_header {
-  border-bottom: 1px solid slategrey;
+  border-bottom: 1px solid $border-color;
   text-align: center;
 }
 
@@ -42,7 +45,7 @@ body {
 
   .error {
     visibility: hidden;
-    color: hotpink;
+    color: $error-color;
     font-size: 12px;
     line-height: 24px;
   }
@@ -61,7 +64,7 @@ body {
 
   button {
     margin: 20px 0 0 0;
-    background-color: pink;
+    background-color: $background-color-layout;
     padding: 4px 10px;
     height: 40px;
     cursor: pointer;
@@ -112,15 +115,15 @@ body {
   height: 100px;
   top: 50%;
   left: 50%;
-  border: 1px solid slategrey;
-  background-color: white;
+  border: 1px solid $border-color;
+  background-color: $background-color-text;
   border-radius: 10px;
   transform: translate(-50%, -50%) scale(0.3);
   transition: transform 0.6s;
   z-index: 2;
 
   .modal_header {
-    border-bottom: 1px solid slategrey;
+    border-bottom: 1px solid $border-color;
     padding: 10px;
     text-align: right;
   }
