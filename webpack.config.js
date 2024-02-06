@@ -1,7 +1,12 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import path from "path";
+import { fileURLToPath } from 'url';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+
+export default {
     mode: 'development',
     entry: './src/index.js',
     module: {
@@ -25,7 +30,7 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['*', '.js', '.jsx']
+        extensions: ['.*', '.js', '.jsx']
     },
     output: {
         filename: 'bundle.js',

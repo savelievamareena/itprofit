@@ -1,11 +1,14 @@
-const express = require("express");
-const cors = require("cors");
-const app = express();
-
+import db from "./db.js";
+import express from "express";
+import cors from "cors";
 const port = 9090;
+
+const app = express();
 
 app.use(cors());
 app.use(express.text({ type: 'application/json' }));
+
+let sequelize = await db();
 
 app.post("/api/registration", (req, res) => {
     if (Math.random() > 0.5) {
@@ -39,34 +42,41 @@ app.get("/api/ping", (req, res) => {
 });
 
 app.post("/api/callback", (req, res) => {
-    res.status(200);
-    let postBody = JSON.parse(req.body);
-    console.log(postBody.name && postBody.email && postBody.phone && postBody.message)
-    if(postBody.name && postBody.email && postBody.phone && postBody.message) {
-        res.send({
-            "status": "success",
-            "msg": "Your request has been successfully sent"
-        });
-    }else {
-        let errorFields = {};
-        if(!postBody.name) {
-            errorFields.name = "Something went wrong. Please, try again later."
-        }
-        if (!postBody.email) {
-            errorFields.email = "Something went wrong. Please, try again later."
-        }
-        if (!postBody.phone) {
-            errorFields.phone = "Something went wrong. Please, try again later."
-        }
-        if (!postBody.message) {
-            errorFields.message = "Something went wrong. Please, try again later."
+    // let postBody = JSON.parse(req.body);
+
+    (async function(req, res){
+        let requestId;
+        let requestBody = req.body;
+        if(typeof req.body === "string") {
+            requestBody = JSON.parse(requestBody);
         }
 
-        res.send({
-            "status": "error",
-            "fields": errorFields
-        })
-    }
+
+        let statusCode = 500;
+        let responseBody = {
+            "status": "error"
+        }
+
+        try {
+            requestId = await sequelize.query(
+                "INSERT INTO requests (name, email, phone_number, message) VALUES (?, ?, ?, ?)",
+                {
+                    replacements: [requestBody.name, requestBody.email, requestBody.phone, requestBody.message]
+                }
+            );
+            if(requestId?.[0]) {
+                statusCode = 200;
+                responseBody.status = "success";
+                responseBody.msg = "Your request has been successfully sent";
+                responseBody.requestId = requestId?.[0];
+            }
+        } catch (error) {
+            responseBody[error?.errors?.[0]?.path] = error?.errors?.[0]?.message;
+        }
+
+        res.status(statusCode);
+        res.send(responseBody);
+    })(req, res);
 })
 
 app.listen(port, () => {

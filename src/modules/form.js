@@ -1,5 +1,4 @@
-import ajaxSubmit from './ajaxSubmit';
-
+import ajaxSubmit from './ajaxSubmit.js';
 class Form {
     constructor(name, email, phone_number, message) {
         this.name = name;
@@ -8,7 +7,6 @@ class Form {
         this.message = message;
     }
 }
-
 function submitForm(formObj) {
     ajaxSubmit(formObj, "http://localhost:9090/api/callback")
         .then(response => {
@@ -38,4 +36,3 @@ function clearForm(...args) {
 }
 
 export {Form, submitForm, clearForm};
-

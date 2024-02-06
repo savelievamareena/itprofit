@@ -1,13 +1,13 @@
 import '../styles/style.scss';
-import Inputmask from "inputmask";
-import {validateName, validateEmail, validatePhone, validateMessage, validateForm} from "./modules/validation";
-import {showError, hideError} from "./modules/errors";
-import {submitForm, Form, clearForm} from "./modules/form";
+import Inputmask from "/node_modules/inputmask/dist/inputmask.es6.js";
+import {validateName, validateEmail, validatePhone, validateMessage, validateForm} from "./modules/validation.js";
+import {showError, hideError} from "./modules/errors.js";
+import {submitForm, Form, clearForm} from "./modules/form.js";
 
 document.addEventListener('DOMContentLoaded', function() {
     let formEl = document.getElementById("formEl");
 
-    const im = new Inputmask("+375(99)999-99-99"); // Маска для российского телефонного номера
+    const im = new Inputmask("+375(99)999-99-99");
 
     let nameField = document.getElementById("name");
     let emailField = document.getElementById("email");
@@ -18,35 +18,35 @@ document.addEventListener('DOMContentLoaded', function() {
     let modalWindow = document.getElementsByClassName("modal_wrapper")[0];
     let closeModal = document.getElementById("close_modal");
 
-    nameField.addEventListener('input', function (e) {
+    nameField.addEventListener('input', function () {
         const name = this.value;
         if (validateName(name)) {
             hideError(this);
         }
     })
 
-    emailField.addEventListener('input', function (e) {
+    emailField.addEventListener('input', function () {
         const email = this.value;
         if (validateEmail(email)) {
             hideError(this);
         }
     })
 
-    phoneNumberField.addEventListener('input', function (e) {
+    phoneNumberField.addEventListener('input', function () {
         const phoneNumber = this.value;
         if (validatePhone(phoneNumber)) {
             hideError(this);
         }
     })
 
-    messageField.addEventListener('input', function (e) {
+    messageField.addEventListener('input', function () {
         const message = this.value;
         if (validateMessage(message)) {
             hideError(this);
         }
     })
 
-    closeModal.addEventListener("click", function(e) {
+    closeModal.addEventListener("click", function() {
         modalWindow.classList.remove("active");
     })
 
